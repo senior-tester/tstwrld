@@ -1,0 +1,28 @@
+<aside class="w-64 flex-shrink-0 bg-white dark:bg-gray-950 border-r border-gray-200 dark:border-gray-800 hidden lg:block">
+    <nav class="p-4 space-y-1" aria-label="Main navigation">
+        <a
+            href="{% url 'bva:index' %}"
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors {% if request.resolver_match.view_name == 'bva:index' %}bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white{% endif %}"
+        >
+            <span aria-hidden="true">📐</span>
+            <span>Boundary Values (BVA)</span>
+        </a>
+        <a
+            href="{% url 'dirty_strings:index' %}"
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors {% if request.resolver_match.view_name == 'dirty_strings:index' %}bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white{% endif %}"
+        >
+            <span aria-hidden="true">🧪</span>
+            <span>Special & Dirty Strings</span>
+        </a>
+        <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg opacity-50 pointer-events-none" aria-disabled="true">
+            <span aria-hidden="true">⏳</span>
+            <span class="text-sm font-medium text-gray-500 dark:text-gray-400 italic">All Pairs</span>
+            <span class="ml-auto px-2 py-0.5 text-xs font-medium uppercase tracking-wider bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-500 rounded">Coming in v0.2</span>
+        </div>
+        <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg opacity-50 pointer-events-none" aria-disabled="true">
+            <span aria-hidden="true">⏳</span>
+            <span class="text-sm font-medium text-gray-500 dark:text-gray-400 italic">JSON/JWT Inspector</span>
+            <span class="ml-auto px-2 py-0.5 text-xs font-medium uppercase tracking-wider bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-500 rounded">Coming in v0.2</span>
+        </div>
+    </nav>
+</aside>

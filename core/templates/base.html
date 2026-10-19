@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" x-data="themeController()" x-init="initTheme()" :class="{ 'dark': isDark }">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}QA Toolkit{% endblock %}</title>
+    <script>
+        (function () {
+            var t = localStorage.getItem("qa-theme");
+            if (t === null) t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+            if (t === "dark") document.documentElement.classList.add("dark");
+        })();
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace'],
+                    },
+                },
+            },
+        };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 min-h-screen transition-colors duration-200">
+    {% include "components/header.html" %}
+    <div class="flex">
+        {% include "components/sidebar.html" %}
+        <main class="flex-1 p-6 lg:p-8 overflow-auto">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    <script>
+        function themeController() {
+            return {
+                isDark: false,
+                initTheme() {
+                    const stored = localStorage.getItem('qa-theme');
+                    if (stored) {
+                        this.isDark = stored === 'dark';
+                    } else {
+                        this.isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    }
+                    this.applyTheme();
+                },
+                toggleTheme() {
+                    this.isDark = !this.isDark;
+                    localStorage.setItem('qa-theme', this.isDark ? 'dark' : 'light');
+                    this.applyTheme();
+                },
+                applyTheme() {
+                    if (this.isDark) {
+                        document.documentElement.classList.add('dark');
+                    } else {
+                        document.documentElement.classList.remove('dark');
+                    }
+                },
+            };
+        }
+    </script>
+</body>
+</html>
